@@ -3,8 +3,12 @@ package com.greglturnquist.hackingspringboot.reactive.controller;
 import com.greglturnquist.hackingspringboot.reactive.domain.Cart;
 import com.greglturnquist.hackingspringboot.reactive.domain.CartRepository;
 import com.greglturnquist.hackingspringboot.reactive.domain.ItemRepository;
+import com.greglturnquist.hackingspringboot.reactive.model.CartItem;
+import com.greglturnquist.hackingspringboot.reactive.service.CartService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.reactive.result.view.Rendering;
 import reactor.core.publisher.Mono;
 
@@ -12,10 +16,12 @@ import reactor.core.publisher.Mono;
 public class HomeController {
     private ItemRepository itemRepository;
     private CartRepository cartRepository;
+    private CartService cartService;
 
-    public HomeController(ItemRepository itemRepository, CartRepository cartRepository) {
+    public HomeController(ItemRepository itemRepository, CartRepository cartRepository, CartService cartService) {
         this.itemRepository = itemRepository;
         this.cartRepository = cartRepository;
+        this.cartService = cartService;
     }
 
     @GetMapping
@@ -29,4 +35,9 @@ public class HomeController {
             .build());
     }
 
+    @PostMapping("/add/{id}") // id로 받은놈을 Cart에 추가
+    Mono<String> addToCart(@PathVariable String id) {
+        return this.cartService.addToCart("My Cart", id)
+            .thenReturn("redirect:/");
+    }
 }
