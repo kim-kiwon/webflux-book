@@ -2,3 +2,8 @@ spring:
   mongodb:
     embedded:
       version: 3.5.5
+#  <input type="hidden" name="_method" value="delete" /> 로 온 요청을 @DeleteMapping으로 전달하는 웹플럭스 필터 enable할지
+  webflux:
+    hiddenmethod:
+      filter:
+        enabled: true
