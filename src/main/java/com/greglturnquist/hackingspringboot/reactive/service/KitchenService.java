@@ -1,5 +1,6 @@
-package com.greglturnquist.hackingspringboot.reactive;
+package com.greglturnquist.hackingspringboot.reactive.service;
 
+import com.greglturnquist.hackingspringboot.reactive.model.Dish;
 import java.time.Duration;
 import java.util.Arrays;
 import java.util.List;
@@ -29,14 +30,9 @@ public class KitchenService {
      * sink.next로 다음 원소를 정의.
      * 다음 원소 딜레이는 250ms로 설정.
      */
-    Flux<Dish> getDishes() {
+    public Flux<Dish> getDishes() {
         return Flux.<Dish> generate(sink -> sink.next(randomDish()))
             .delayElements(Duration.ofMillis(250));
     }
-
-
-
-
-
 
 }

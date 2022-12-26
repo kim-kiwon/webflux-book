@@ -1,6 +1,6 @@
-package com.greglturnquist.hackingspringboot.reactive;
+package com.greglturnquist.hackingspringboot.reactive.model;
 
-class Dish {
+public class Dish {
     // Dish 설명
     private String description;
     // Dish 배달 완료되었는지
@@ -13,7 +13,7 @@ class Dish {
         return deliveredDish;
     }
 
-    Dish(String description) {
+    public Dish(String description) {
         this.description = description;
     }
 
